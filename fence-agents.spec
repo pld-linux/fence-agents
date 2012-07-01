@@ -15,6 +15,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
 BuildRequires:	perl(Net::Telnet)
+BuildRequires:	python-pexpect
 BuildRequires:	python-pycurl
 BuildRequires:	python-suds
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
