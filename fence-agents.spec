@@ -5,17 +5,20 @@
 Summary:	Reusable cluster fencing scripts
 Summary(pl.UTF-8):	Skrypty barier klastrowych wielokrotnego użytku
 Name:		fence-agents
-Version:	3.1.8
+Version:	3.1.12
 Release:	1
-License:	GPL v2+; LGPL v2.1+
+License:	GPL v2+ (libraries), LGPL v2.1+ (applications)
 Group:		Daemons
 Source0:	https://fedorahosted.org/releases/f/e/fence-agents/%{name}-%{version}.tar.xz
-# Source0-md5:	2dbdd6d820a126478eb7600c3be1b075
+# Source0-md5:	07b4ab210f27cd442c0bc03b083ebc89
 URL:		https://fedorahosted.org/cluster/wiki/HomePage
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake
 BuildRequires:	libtool >= 2:2.2.6
+BuildRequires:	nspr-devel
+BuildRequires:	nss-devel
 BuildRequires:	perl-Net-Telnet
+BuildRequires:	pkgconfig
 BuildRequires:	python-pexpect
 BuildRequires:	python-pycurl
 BuildRequires:	python-suds
@@ -58,7 +61,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc doc/README.licence
+%doc ChangeLog doc/{COPYRIGHT,README.licence}
 %attr(755,root,root) %{_sbindir}/fence_*
 %{_sysconfdir}/cluster/fence_na.conf
 %{_datadir}/fence
