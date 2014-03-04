@@ -5,19 +5,17 @@
 Summary:	Reusable cluster fencing scripts
 Summary(pl.UTF-8):	Skrypty barier klastrowych wielokrotnego użytku
 Name:		fence-agents
-Version:	4.0.7
+Version:	4.0.7.1
 Release:	1
 License:	GPL v2+ (libraries), LGPL v2.1+ (applications)
 Group:		Daemons
 Source0:	https://fedorahosted.org/releases/f/e/fence-agents/%{name}-%{version}.tar.xz
-# Source0-md5:	5669cfc4a25040f7acd324bafcd14468
+# Source0-md5:	9dc77c05b420b3ad00bc63acfa90424f
 Patch0:		%{name}-check.patch
 URL:		https://fedorahosted.org/cluster/wiki/HomePage
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake
 BuildRequires:	libtool >= 2:2.2.6
-BuildRequires:	nspr-devel
-BuildRequires:	nss-devel
 BuildRequires:	perl-Net-Telnet
 BuildRequires:	pkgconfig
 BuildRequires:	python-pexpect
@@ -26,8 +24,14 @@ BuildRequires:	python-suds
 BuildRequires:	rpm-perlprov
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
+# /usr/bin/gnutls-cli tool
+Requires:	gnutls
 # XXX: is it proper dependency for cluster 4?
 Requires:	resource-agents >= 3.9
+# /usr/bin/amttool
+Suggests:	amtterm
+# /usr/bin/ipmitool
+Suggests:	ipmitool
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
