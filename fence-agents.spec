@@ -5,12 +5,12 @@
 Summary:	Reusable cluster fencing scripts
 Summary(pl.UTF-8):	Skrypty barier klastrowych wielokrotnego użytku
 Name:		fence-agents
-Version:	4.0.10
+Version:	4.0.11
 Release:	1
 License:	GPL v2+ (libraries), LGPL v2.1+ (applications)
 Group:		Daemons
 Source0:	https://fedorahosted.org/releases/f/e/fence-agents/%{name}-%{version}.tar.xz
-# Source0-md5:	3e7466a507f10cc5d2c3e49da84946f9
+# Source0-md5:	8d3d72670e836782ef97ada368484ef1
 Patch0:		%{name}-check.patch
 URL:		https://fedorahosted.org/cluster/wiki/HomePage
 BuildRequires:	autoconf >= 2.63
@@ -72,6 +72,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_sbindir}/fence_*
 %attr(755,root,root) %{_libexecdir}/fence_kdump_send
 %{_datadir}/fence
+%attr(755,root,root) %{_datadir}/cluster/fence_scsi_check
 %dir %{_datadir}/cluster/relaxng
 %{_datadir}/cluster/relaxng/fence.rng.head
 %{_datadir}/cluster/relaxng/fence.rng.tail
