@@ -5,12 +5,12 @@
 Summary:	Reusable cluster fencing scripts
 Summary(pl.UTF-8):	Skrypty barier klastrowych wielokrotnego użytku
 Name:		fence-agents
-Version:	4.0.11
+Version:	4.0.21
 Release:	1
 License:	GPL v2+ (libraries), LGPL v2.1+ (applications)
 Group:		Daemons
 Source0:	https://fedorahosted.org/releases/f/e/fence-agents/%{name}-%{version}.tar.xz
-# Source0-md5:	8d3d72670e836782ef97ada368484ef1
+# Source0-md5:	ed5376de5956fd507624ce752e06c0bd
 Patch0:		%{name}-check.patch
 URL:		https://fedorahosted.org/cluster/wiki/HomePage
 BuildRequires:	autoconf >= 2.63
@@ -20,6 +20,7 @@ BuildRequires:	perl-Net-Telnet
 BuildRequires:	pkgconfig
 BuildRequires:	python-pexpect
 BuildRequires:	python-pycurl
+BuildRequires:	python-requests
 BuildRequires:	python-suds
 BuildRequires:	rpm-perlprov
 BuildRequires:	tar >= 1:1.22
@@ -30,8 +31,22 @@ Requires:	gnutls
 Requires:	resource-agents >= 3.9
 # /usr/bin/amttool
 Suggests:	amtterm
+# /usr/sbin/corosync-cmapctl tool
+Suggests:	corosync
 # /usr/bin/ipmitool
 Suggests:	ipmitool
+# /sbin/vgs
+Suggests:	lvm2
+# /sbin/mpathpersist
+Suggests:	multipath-tools
+# /usr/bin/snmpget, /usr/bin/snmpset, /usr/bin/snmpwalk
+Suggests:	net-snmp-tools
+Suggests:	openssh-clients
+# /usr/bin/sg_persist, /usr/bin/sg_turs
+Suggests:	sg3_utils
+Suggests:	sudo
+Suggests:	telnet
+# /usr/bin/nova - seems not used
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -46,7 +61,7 @@ Skrypty zapewniające funkcjonalność barier dla węzłów klastra.
 
 %build
 %{__libtoolize}
-%{__aclocal}
+%{__aclocal} -I make
 %{__autoconf}
 %{__autoheader}
 %{__automake}
@@ -78,5 +93,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/cluster/relaxng/fence.rng.tail
 %{_datadir}/cluster/relaxng/fence2man.xsl
 %{_datadir}/cluster/relaxng/fence2rng.xsl
+%{_datadir}/cluster/relaxng/fence2wiki.xsl
 %{_datadir}/cluster/relaxng/metadata.rng
 %{_mandir}/man8/fence_*.8*

@@ -1,6 +1,6 @@
 --- fence-agents-4.0.10/fence/agents/lib/check_used_options.py.orig	2014-07-01 12:53:45.000000000 +0200
 +++ fence-agents-4.0.10/fence/agents/lib/check_used_options.py	2014-07-05 08:41:55.273724364 +0200
-@@ -22,6 +22,10 @@
+@@ -22,6 +22,12 @@
  
  	## add UUID which is derived automatically from --plug if possible
  	available["--uuid"] = True
@@ -8,21 +8,23 @@
 +	available["--plugs"] = True
 +	# probably should be defined
 +	available["--managed"] = True
++	# used temporarily in lib/fencing.py
++	available["--original-action"] = True
  
  	## all_opt defined in fence agent are found
  	agent_file = open(agent)
-@@ -48,12 +52,12 @@
+@@ -48,12 +54,12 @@
  
  		for option in option_use_re.findall(line):
  			if not available.has_key(option):
 -				print "ERROR on line %d in %s: option %s is not defined" % (counter, agent, option_use_re.search(line).group(1))
-+				print "ERROR on line %d in %s: option %s is not defined" % (counter, agent, x)
++				print "ERROR on line %d in %s: option %s is not defined" % (counter, agent, option)
  				without_errors = False
  
  		for option in option_has_re.findall(line):
  			if not available.has_key(option):
 -				print "ERROR on line %d in %s: option %s is not defined" % (counter, agent, option_has_re.search(line).group(1))
-+				print "ERROR on line %d in %s: option %s is not defined" % (counter, agent, x)
++				print "ERROR on line %d in %s: option %s is not defined" % (counter, agent, option)
  				without_errors = False
  
  	if without_errors:
