@@ -1,5 +1,5 @@
---- fence-agents-4.0.10/fence/agents/lib/check_used_options.py.orig	2014-07-01 12:53:45.000000000 +0200
-+++ fence-agents-4.0.10/fence/agents/lib/check_used_options.py	2014-07-05 08:41:55.273724364 +0200
+--- fence-agents-4.0.24/fence/agents/lib/check_used_options.py.orig	2016-08-22 14:33:34.000000000 +0200
++++ fence-agents-4.0.24/fence/agents/lib/check_used_options.py	2016-10-16 16:32:47.907160497 +0200
 @@ -22,6 +22,12 @@
  
  	## add UUID which is derived automatically from --plug if possible
@@ -16,15 +16,15 @@
 @@ -48,12 +54,12 @@
  
  		for option in option_use_re.findall(line):
- 			if not available.has_key(option):
--				print "ERROR on line %d in %s: option %s is not defined" % (counter, agent, option_use_re.search(line).group(1))
-+				print "ERROR on line %d in %s: option %s is not defined" % (counter, agent, option)
+ 			if option not in available:
+-				print("ERROR on line %d in %s: option %s is not defined" % (counter, agent, option_use_re.search(line).group(1)))
++				print("ERROR on line %d in %s: option %s is not defined" % (counter, agent, option))
  				without_errors = False
  
  		for option in option_has_re.findall(line):
- 			if not available.has_key(option):
--				print "ERROR on line %d in %s: option %s is not defined" % (counter, agent, option_has_re.search(line).group(1))
-+				print "ERROR on line %d in %s: option %s is not defined" % (counter, agent, option)
+ 			if option not in available:
+-				print("ERROR on line %d in %s: option %s is not defined" % (counter, agent, option_has_re.search(line).group(1)))
++				print("ERROR on line %d in %s: option %s is not defined" % (counter, agent, option))
  				without_errors = False
  
  	if without_errors:

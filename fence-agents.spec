@@ -1,16 +1,15 @@
-#
 # TODO:
 #	- split into subpackages
 %include	/usr/lib/rpm/macros.perl
 Summary:	Reusable cluster fencing scripts
 Summary(pl.UTF-8):	Skrypty barier klastrowych wielokrotnego użytku
 Name:		fence-agents
-Version:	4.0.21
+Version:	4.0.24
 Release:	1
 License:	GPL v2+ (libraries), LGPL v2.1+ (applications)
 Group:		Daemons
 Source0:	https://fedorahosted.org/releases/f/e/fence-agents/%{name}-%{version}.tar.xz
-# Source0-md5:	ed5376de5956fd507624ce752e06c0bd
+# Source0-md5:	161195adb0c125bbbbc1440920a2ff28
 Patch0:		%{name}-check.patch
 URL:		https://fedorahosted.org/cluster/wiki/HomePage
 BuildRequires:	autoconf >= 2.63
@@ -18,6 +17,7 @@ BuildRequires:	automake
 BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	perl-Net-Telnet
 BuildRequires:	pkgconfig
+BuildRequires:	python-openwsman
 BuildRequires:	python-pexpect
 BuildRequires:	python-pycurl
 BuildRequires:	python-requests
@@ -46,6 +46,8 @@ Suggests:	openssh-clients
 Suggests:	sg3_utils
 Suggests:	sudo
 Suggests:	telnet
+# [/usr]/sbin/sbd
+Suggests:	cluster-sbd
 # /usr/bin/nova - seems not used
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -65,7 +67,8 @@ Skrypty zapewniające funkcjonalność barier dla węzłów klastra.
 %{__autoconf}
 %{__autoheader}
 %{__automake}
-%configure
+%configure \
+	SBD_PATH=/usr/sbin/sbd
 
 %{__make}
 
@@ -88,6 +91,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libexecdir}/fence_kdump_send
 %{_datadir}/fence
 %attr(755,root,root) %{_datadir}/cluster/fence_scsi_check
+%attr(755,root,root) %{_datadir}/cluster/fence_scsi_check_hardreboot
 %dir %{_datadir}/cluster/relaxng
 %{_datadir}/cluster/relaxng/fence.rng.head
 %{_datadir}/cluster/relaxng/fence.rng.tail
