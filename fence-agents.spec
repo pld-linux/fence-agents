@@ -1,6 +1,5 @@
 # TODO:
 #	- split into subpackages
-%include	/usr/lib/rpm/macros.perl
 Summary:	Reusable cluster fencing scripts
 Summary(pl.UTF-8):	Skrypty barier klastrowych wielokrotnego użytku
 Name:		fence-agents
